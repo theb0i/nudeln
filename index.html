@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=local_fire_department,water_drop" />
+    <title>Gewichtsrechner</title>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="box">
+            <p><span class="material-symbols-outlined">local_fire_department</span>Trocken</p>
+            <input type="number" id="dryWeight" step="any" placeholder="DRY">
+        </div>
+
+
+        <div class="box">
+            <p><span class="material-symbols-outlined">water_drop</span>Nass</p>
+            <input type="number" id="wetWeight" step="any" placeholder="WET">
+                    </div>
+
+    </div>
+
+    <div class="container">
+        <div class="box">
+            <button class="btnReset" id="clearDryWeight">X</button>
+        </div>
+    </div>
+
+    <br>
+
+        <div class="container">
+            
+            <div id="result" class="result"></div>
+        </div>
+
+
+
+
+ 
+
+    <script>
+const dryWeightInput = document.getElementById("dryWeight");
+const wetWeightInput = document.getElementById("wetWeight");
+const resultDisplay = document.getElementById("result");
+const clearDryWeightButton = document.getElementById("clearDryWeight");
+const clearWetWeightButton = document.getElementById("clearWetWeight");
+
+dryWeightInput.addEventListener("input", () => {
+    const dryWeight = parseFloat(dryWeightInput.value);
+    if (!isNaN(dryWeight)) {
+        const calculatedWetWeight = (dryWeight * 2.23).toFixed(2);
+        wetWeightInput.value = calculatedWetWeight;
+        resultDisplay.textContent = `Nassgewicht: ${calculatedWetWeight}`;
+    } else {
+        resultDisplay.textContent = "-";
+        wetWeightInput.value = "";
+    }
+});
+
+wetWeightInput.addEventListener("input", () => {
+    const wetWeight = parseFloat(wetWeightInput.value);
+    if (!isNaN(wetWeight)) {
+        const calculatedDryWeight = (wetWeight / 2.23).toFixed(2);
+        dryWeightInput.value = calculatedDryWeight;
+        resultDisplay.textContent = `Trockengewicht: ${calculatedDryWeight}`;
+    } else {
+        resultDisplay.textContent = "-";
+        dryWeightInput.value = "";
+    }
+});
+
+const clearFields = () => {
+    dryWeightInput.value = "";
+    wetWeightInput.value = "";
+    resultDisplay.textContent = "-";
+};
+
+clearDryWeightButton.addEventListener("click", clearFields);
+clearWetWeightButton.addEventListener("click", clearFields);
+
+    </script>
+</body>
+</html>
